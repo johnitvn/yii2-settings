@@ -25,7 +25,6 @@ class m140618_045255_create_settings extends \yii\db\Migration
     public function down()
     {
         echo "m140618_045255_create_settings cannot be reverted.\n";
-
         return false;
     }
 }
