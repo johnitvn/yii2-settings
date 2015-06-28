@@ -1,9 +1,9 @@
 <?php 
 namespace johnitvn\settings\controllers;
 
+use \yii\base\Controller as BaseController;
 
-
-class ManagerController extends \yii\base\Controller
+class ManagerController extends BaseController
 {
 
 	public function actionIndex(){

@@ -11,10 +11,12 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "yiisoft/yii2": "*",
-        "pheme/yii2-toggle-column": "*"
+        "yiisoft/yii2": "*"
     },
-    "psr-4": {
-        "johnitvn\\settings\\": "src/"
+    "autoload": {
+        "psr-4": {
+            "johnitvn\\settings\\": "src/"
+        }
     }
+  
 }

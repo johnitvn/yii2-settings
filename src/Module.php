@@ -1,11 +1,12 @@
 <?php 
 namespace johnitvn\settings;
 
-use yii\base\Module; 
+use yii\base\Module as BaseModule; 
 
-class Module extends Module
+class Module extends BaseModule
 {
 
-	public $defaultRoute = 'manager/index';
+	public $controllerNamespace = 'johnitvn\settings\controllers';
+	//public $defaultRoute = 'manager/index';
 
 }
