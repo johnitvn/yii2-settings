@@ -25,6 +25,7 @@ class Setting extends ActiveRecord
             [['value'], 'string'],
             [['section', 'key'], 'string', 'max' => 255],
             [['type', 'created', 'modified'], 'safe'],
+            ['type','in','range'=>['boolean','integer','string'],'strict'=>true],
             [['active'], 'boolean'],
         ];
     }
