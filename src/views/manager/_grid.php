@@ -2,6 +2,7 @@
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 use kartik\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel johnitvn\settings\models\SettingsSearch */
@@ -46,9 +47,9 @@ $gridColumns = [
         'dropdown' => true,
         'vAlign'=>'middle',
         'urlCreator' => function($action, $model, $key, $index) { return '#'; },
-        'viewOptions'=>['title'=>$viewMsg, 'data-toggle'=>'tooltip'],
-        'updateOptions'=>['title'=>$updateMsg, 'data-toggle'=>'tooltip'],
-        'deleteOptions'=>['title'=>$deleteMsg, 'data-toggle'=>'tooltip'], 
+        'viewOptions'=>['title'=>'$viewMsg', 'data-toggle'=>'tooltip'],
+        'updateOptions'=>['title'=>'$updateMsg', 'data-toggle'=>'tooltip'],
+        'deleteOptions'=>['title'=>'$deleteMsg', 'data-toggle'=>'tooltip'], 
     ],
     ['class' => 'kartik\grid\CheckboxColumn']
 ];
@@ -69,8 +70,8 @@ echo GridView::widget([
     ],
     'toolbar' =>  [
         ['content'=>
-            Html::button('&lt;i class="glyphicon glyphicon-plus">&lt;/i>', ['type'=>'button', 'title'=>Yii::t('kvgrid', 'Add Book'), 'class'=>'btn btn-success', 'onclick'=>'alert("This will launch the book creation form.\n\nDisabled for this demo!");']) . ' '.
-            Html::a('&lt;i class="glyphicon glyphicon-repeat">&lt;/i>', ['grid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>Yii::t('kvgrid', 'Reset Grid')])
+            Html::button('&lt;i class="glyphicon glyphicon-plus">&lt;/i>', ['type'=>'button', 'title'=>'Add Book', 'class'=>'btn btn-success', 'onclick'=>'alert("This will launch the book creation form.\n\nDisabled for this demo!");']) . ' '.
+            Html::a('&lt;i class="glyphicon glyphicon-repeat">&lt;/i>', ['grid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
         ],
         '{export}',
         '{toggleData}'
@@ -82,7 +83,7 @@ echo GridView::widget([
     'responsive' => true,
     'hover' => true,
     'floatHeader' => true,
-    'floatHeaderOptions' => ['scrollingTop' => $scrollingTop],
+    //'floatHeaderOptions' => ['scrollingTop' => $scrollingTop],
     'showPageSummary' => true,
     'panel' => [
         'type' => GridView::TYPE_PRIMARY
