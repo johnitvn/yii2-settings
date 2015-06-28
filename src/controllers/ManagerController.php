@@ -4,7 +4,7 @@ namespace johnitvn\settings\controllers;
 
 use Yii;
 use johnitvn\settings\models\Setting;
-use johnitvn\settings\models\SettingSearch;
+use johnitvn\settings\models\SettingsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -34,11 +34,12 @@ class ManagerController extends Controller
      */
     public function actionIndex()
     {    
-        $searchModel = new SettingSearch();
+               $searchModel = new SettingsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('index',[
-            'searchModel'=>$searchModel,
-            'dataProvider'=>$dataProvider,
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

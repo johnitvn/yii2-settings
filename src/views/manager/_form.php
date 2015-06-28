@@ -18,7 +18,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'value')->textarea(['rows' => 3]) ?>
+    <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'active')->textInput() ?>
+
+    <?= $form->field($model, 'created')->textInput() ?>
+
+    <?= $form->field($model, 'modified')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

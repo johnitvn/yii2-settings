@@ -1,13 +1,11 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use johnitvn\ajaxcrud\CrudAsset; 
 use yii\helpers\Url;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel johnitvn\settings\models\SettingSearch */
+/* @var $searchModel johnitvn\settings\models\SettingsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Settings';
@@ -19,37 +17,13 @@ CrudAsset::register($this);
 <div class="setting-index">
     <div id="ajaxCrudDatatable">
         <?php
-Pjax::begin();
-echo                 GridView::widget([
-                'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
-            'columns' => [
-                   ['class'=>'johnitvn\ajaxcrud\BulkColumn'],
-                   ['class' => 'yii\grid\SerialColumn'],
-            
-                   // 'id',
-           'type',
-           'section',
-           'key',
-           'value:ntext',
-           'active',
-           // 'created',
-           // 'modified',
-
-                    ['class' => 'johnitvn\ajaxcrud\AjaxCrudActionColumn'],
-                ],
-            ]); 
-                
-Pjax::end() ;?>    </div>
-    <div class="form-inline pull-left">
-        <div class="checkbox">
-            <label>
-              <input id="select-all" type="checkbox"> Select All 
-            </label>
-        </div>        
-        <button id="createNewModel" class="btn btn-sm btn-primary" data-url="<?=Url::to(["create"])?>"><span class="action-column glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Add <?=$this->title?></button>
+                            return $this->render('_grid', [ 
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                ]);
+                        
+        ?>
     </div>
-    <button id="createNewModel" class="btn btn-sm btn-primary pull-right" data-url="<?=Url::to(["create"])?>"><span class="action-column glyphicon glyphicon-plus"></span>&nbsp;&nbsp;&nbsp;Add <?=$this->title?></button>   
 </div>
 
 

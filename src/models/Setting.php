@@ -6,8 +6,10 @@ use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 use Yii;
+use johnitvn\ajaxcrud\TouchableInterface;
 
 class Setting extends ActiveRecord 
+implements TouchableInterface
 {
     /**
      * @inheritdoc
@@ -143,5 +145,40 @@ class Setting extends ActiveRecord
     public function deleteAllSettings()
     {
         return static::deleteAll();
+    }
+
+    
+    /**
+    * 
+    * @return array the list of fields can touch
+    * example:
+    *   return ['block',active']
+    */
+    public function getTouchableFields(){
+
+    }   
+
+
+    /**
+    * @return array the list of touchable button 's label 
+    * 
+    * example:
+    *   return [
+    *       'block'=>[
+    *           'true'=>'Block',
+    *           'false'=>'UnB\block',
+    *       ]
+    *   ];
+    */
+    public function getTouchableButtonLabels(){
+
+    }
+
+    /**
+    * @param string $fieldName The name of field want to touch
+    * @return boolean the value after touch
+    */
+    public function touchField($fieldName){
+
     }
 }
