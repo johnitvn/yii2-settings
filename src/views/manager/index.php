@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use johnitvn\ajaxcrud\assets\CrudAsset; 
+use johnitvn\ajaxcrudassets\CrudAsset; 
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
