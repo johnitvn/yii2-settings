@@ -5,12 +5,12 @@ namespace johnitvn\settings\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use johnitvn\settings\models\Setting;
+use johnitvn\settings\models\Settings;
 
 /**
- * SettingsSearch represents the model behind the search form about `johnitvn\settings\models\Setting`.
+ * SettingsSearch represents the model behind the search form about `johnitvn\settings\models\Settings`.
  */
-class SettingsSearch extends Setting
+class SettingsSearch extends Settings
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class SettingsSearch extends Setting
      */
     public function search($params)
     {
-        $query = Setting::find();
+        $query = Settings::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -1,8 +1,9 @@
 <?php
 use yii\helpers\Url;
 use yii\widgets\Pjax;
-use kartik\grid\GridView;
+use johnitvn\ajaxcrud\GridView;
 use yii\helpers\Html;
+use johnitvn\settings\controllers\ManagerController; 
 
 /* @var $this yii\web\View */
 /* @var $searchModel johnitvn\settings\models\SettingsSearch */
@@ -13,81 +14,108 @@ use yii\helpers\Html;
 
 
 <?php
-Pjax::begin();
+
+/**
+* Grid toolbar config
+*/
+$createActionButton = Html::a('<i class="glyphicon glyphicon-plus"></i>',['create'],['data-modal-title'=>'Create new Settings','class'=>'create-action-button btn btn-default']);
+$refreshActionButton = Html::a('<i class="glyphicon glyphicon-repeat"></i>',['index'],['data-pjax'=>1,'class'=>'btn btn-default']);
+$fullScreenActionButton = Html::a('<i class="glyphicon glyphicon-resize-full"></i>','#',['class'=>'btn-toggle-fullscreen btn btn-default']);
+
+
+$bulkDeleteButton = Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Delete All Selected',
+                                 ["bulk-delete"] ,
+                                 [
+                                     "class"=>"btn-bulk-delete btn btn-danger",
+                                     "data-method"=>"post",
+                                     "title"=>"Delete All Selected",
+                                     "data-confirm-message"=>"Are you sure to delete all this items?"
+                                 ]);
+
+
+/**
+* Grid column config
+*/
 $gridColumns = [
-    ['class' => 'kartik\grid\SerialColumn'],
     [
-        'class' => 'kartik\grid\EditableColumn',
-        'attribute' => 'name',
-        'pageSummary' => 'Page Total',
-        'vAlign'=>'middle',
-        'headerOptions'=>['class'=>'kv-sticky-column'],
-        'contentOptions'=>['class'=>'kv-sticky-column'],
-        'editableOptions'=>['header'=>'Name', 'size'=>'md']
+        'class' => 'kartik\grid\CheckboxColumn',
+        'width' => '20px',
     ],
     [
-        'attribute'=>'color',
-        'value'=>function ($model, $key, $index, $widget) {
-            return "<span class='badge' style='background-color: {$model->color}'> </span>  <code>" . 
-                $model->color . '</code>';
-        },
-        'filterType'=>GridView::FILTER_COLOR,
-        'vAlign'=>'middle',
-        'format'=>'raw',
-        'width'=>'150px',
-        'noWrap'=>true
+        'class' => 'kartik\grid\SerialColumn',
+        'width' => '30px',
+    ],
+    // [
+        // 'class'=>'\kartik\grid\DataColumn',
+        // 'attribute'=>'id',
+    // ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'type',
+        'filterType'=>GridView::FILTER_SELECT2,
+        'filter'=>['string','integer','boolean','float'], 
     ],
     [
-        'class'=>'kartik\grid\BooleanColumn',
-        'attribute'=>'status', 
-        'vAlign'=>'middle',
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'section',
     ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'key',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'value',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'active',
+    ],
+    // [
+        // 'class'=>'\kartik\grid\DataColumn',
+        // 'attribute'=>'created',
+    // ],
+    // [
+        // 'class'=>'\kartik\grid\DataColumn',
+        // 'attribute'=>'modified',
+    // ],
     [
         'class' => 'kartik\grid\ActionColumn',
-        'dropdown' => true,
+        'dropdown' => false,
         'vAlign'=>'middle',
-        'urlCreator' => function($action, $model, $key, $index) { return '#'; },
-        'viewOptions'=>['title'=>'$viewMsg', 'data-toggle'=>'tooltip'],
-        'updateOptions'=>['title'=>'$updateMsg', 'data-toggle'=>'tooltip'],
-        'deleteOptions'=>['title'=>'$deleteMsg', 'data-toggle'=>'tooltip'], 
+        'urlCreator' => function($action, $model, $key, $index) { 
+                return Url::to([$action,'id'=>$key]);
+        },
+        'viewOptions'=>['class'=>'view-action-button','title'=>'View', 'data-toggle'=>'tooltip','data-modal-title'=>'View Settings'],
+        'updateOptions'=>['class'=>'update-action-button','title'=>'Update', 'data-toggle'=>'tooltip','data-modal-title'=>'Update Settings'],
+        'deleteOptions'=>['class'=>'delete-action-button','title'=>'Delete', 'data-toggle'=>'tooltip','data-confirm-message'=>'Are you sure to delete this item?'], 
     ],
-    ['class' => 'kartik\grid\CheckboxColumn']
-];
+
+];   
+
 echo GridView::widget([
+    'id'=>'crud-datatable',
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'columns' => $gridColumns,
-    'containerOptions' => ['style'=>'overflow: auto'], // only set when $responsive = false
-    'beforeHeader'=>[
-        [
-            'columns'=>[
-                ['content'=>'Header Before 1', 'options'=>['colspan'=>4, 'class'=>'text-center warning']], 
-                ['content'=>'Header Before 2', 'options'=>['colspan'=>4, 'class'=>'text-center warning']], 
-                ['content'=>'Header Before 3', 'options'=>['colspan'=>3, 'class'=>'text-center warning']], 
-            ],
-            'options'=>['class'=>'skip-export'] // remove this row from export
-        ]
-    ],
-    'toolbar' =>  [
-        ['content'=>
-            Html::button('&lt;i class="glyphicon glyphicon-plus">&lt;/i>', ['type'=>'button', 'title'=>'Add Book', 'class'=>'btn btn-success', 'onclick'=>'alert("This will launch the book creation form.\n\nDisabled for this demo!");']) . ' '.
-            Html::a('&lt;i class="glyphicon glyphicon-repeat">&lt;/i>', ['grid-demo'], ['data-pjax'=>0, 'class' => 'btn btn-default', 'title'=>'Reset Grid'])
-        ],
-        '{export}',
-        '{toggleData}'
-    ],
-    'pjax' => true,
+    'toolbar' =>  [['content'=> $createActionButton.$refreshActionButton.$fullScreenActionButton.'{toogleDataNoContainer}'],'{export}'],
     'bordered' => true,
-    'striped' => false,
-    'condensed' => false,
-    'responsive' => true,
-    'hover' => true,
-    'floatHeader' => true,
-    //'floatHeaderOptions' => ['scrollingTop' => $scrollingTop],
-    'showPageSummary' => true,
+    'striped' => true,
+    'condensed' => true,
+    'responsive' =>true,
+    'responsiveWrap' => false,
+    'hover' => false,
+    'showPageSummary' => false,        
     'panel' => [
-        'type' => GridView::TYPE_PRIMARY
-    ],
+        'type' => 'primary', 
+        'heading' => '<i class="glyphicon glyphicon glyphicon-list"></i>  Lists',
+        'before' => '<em>* Resize table columns just like a spreadsheet by dragging the column edges.</em>',
+        'after' =>  '<div class="pull-left"></div><div class="pull-right">'.$bulkDeleteButton.'</div><div class="clearfix"></div>',
+        ],    
+
 ]);
 
-Pjax::end() ;?>
+?>
+
+   
+  

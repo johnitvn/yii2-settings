@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model johnitvn\settings\models\Setting */
+/* @var $model johnitvn\settings\models\Settings */
 
 ?>
-<div class="setting-create">
+<div class="settings-create">
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
