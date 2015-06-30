@@ -42,7 +42,7 @@ class Settings extends Component
      *
      * @var string cache key
      */
-    public $cacheKey = 'pheme/settings';
+    public $cacheKey = 'johnitvn/settings';
 
     /**
      * Holds a cached copy of the data for the current request
@@ -83,20 +83,9 @@ class Settings extends Component
      * @param null $default
      * @return mixed
      */
-    public function get($key, $section = null, $default = null)
-    {
-        if (is_null($section)) {
-            $pieces = explode('.', $key, 2);
-            if (count($pieces) > 1) {
-                $section = $pieces[0];
-                $key = $pieces[1];
-            } else {
-                $section = '';
-            }
-        }
-
+    public function get($section, $key, $default = null)
+    {       
         $data = $this->getRawConfig();
-
         if (isset($data[$section][$key][0])) {
             settype($data[$section][$key][0], $data[$section][$key][1]);
         } else {
@@ -112,14 +101,8 @@ class Settings extends Component
      * @param null $type
      * @return boolean
      */
-    public function set($key, $value, $section = null, $type = null)
+    public function set($section,$key, $value, $type = null)
     {
-        if (is_null($section)) {
-            $pieces = explode('.', $key);
-            $section = $pieces[0];
-            $key = $pieces[1];
-        }
-
         if ($this->model->setSetting($section, $key, $value, $type)) {
             if ($this->clearCache()) {
                 return true;
@@ -135,13 +118,8 @@ class Settings extends Component
      * @param null|string $section
      * @return bool
      */
-    public function delete($key, $section = null)
-    {
-        if (is_null($section)) {
-            $pieces = explode('.', $key);
-            $section = $pieces[0];
-            $key = $pieces[1];
-        }
+    public function delete($section,$key)
+    {       
         return $this->model->deleteSetting($section, $key);
     }
 
@@ -155,40 +133,7 @@ class Settings extends Component
         return $this->model->deleteAllSettings();
     }
 
-    /**
-     * Activates a setting
-     *
-     * @param $key
-     * @param null|string $section
-     * @return bool
-     */
-    public function activate($key, $section = null)
-    {
-        if (is_null($section)) {
-            $pieces = explode('.', $key);
-            $section = $pieces[0];
-            $key = $pieces[1];
-        }
-        return $this->model->activateSetting($section, $key);
-    }
-
-    /**
-     * Deactivates a setting
-     *
-     * @param $key
-     * @param null|string $section
-     * @return bool
-     */
-    public function deactivate($key, $section = null)
-    {
-        if (is_null($section)) {
-            $pieces = explode('.', $key);
-            $section = $pieces[0];
-            $key = $pieces[1];
-        }
-        return $this->model->deactivateSetting($section, $key);
-    }
-
+  
     /**
      * Clears the settings cache on demand.
      * If you haven't configured cache this does nothing.

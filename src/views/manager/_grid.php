@@ -45,15 +45,12 @@ $gridColumns = [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'id',
-    // ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'type',
         'filterType'=>GridView::FILTER_SELECT2,
-        'filter'=>['string','integer','boolean','float'], 
+        'filter'=>[''=>'All','string'=>'String','integer'=>'Integer','boolean'=>'Boolean','float'=>'Float','null'=>'Null'], 
+        'width' => '120px',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
@@ -66,19 +63,7 @@ $gridColumns = [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'value',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'active',
-    ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'created',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'modified',
-    // ],
+    ],   
     [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,

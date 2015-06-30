@@ -15,10 +15,7 @@ use yii\widgets\DetailView;
             'type',
             'section',
             'key',
-            'value:ntext',
-            'active',
-            'created',
-            'modified',
+            'value:ntext',       
         ],
     ]) ?>
 

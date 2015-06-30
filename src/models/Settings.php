@@ -33,10 +33,9 @@ class Settings extends \yii\db\ActiveRecord
     {
         return [
             [['value'], 'string'],
-            [['active'], 'integer'],
-            [['created', 'modified'], 'safe'],
             [['type', 'section', 'key'], 'string', 'max' => 255],
-            [['type','section','key'],'required']
+            [['type','section','key'],'required'],
+            [['type'],'in','range'=>['string','integer','boolean','float','null']],
         ];
     }
 
@@ -51,9 +50,73 @@ class Settings extends \yii\db\ActiveRecord
             'section' => 'Section',
             'key' => 'Key',
             'value' => 'Value',
-            'active' => 'Active',
-            'created' => 'Created',
-            'modified' => 'Modified',
         ];
     }
+
+    /**
+     * Gets all a combined map of all the settings.
+     * @return array
+     */
+    public function getSettings()
+    {
+        $settings = static::find()->where(['active' => 1])->asArray()->all();
+        return array_merge_recursive(
+            ArrayHelper::map($settings, 'key', 'value', 'section'),
+            ArrayHelper::map($settings, 'key', 'type', 'section')
+        );
+    }
+
+     /**
+     * Saves a setting
+     *
+     * @param $section
+     * @param $key
+     * @param $value
+     * @param $type
+     * @return bool
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function setSetting($section, $key, $value, $type = null)
+    {
+        $model = static::findOne(['section' => $section, 'key' => $key]);
+        if ($model === null) {
+            $model = new static();
+            $model->active = 1;
+        }
+        $model->section = $section;
+        $model->key = $key;
+        $model->value = strval($value);
+        if ($type !== null) {
+            $model->type = $type;
+        } else {
+            $model->type = gettype($value);
+        }
+        return $model->save();
+    }
+
+    /**
+     * Deletes a settings
+     *
+     * @param $key
+     * @param $section
+     * @return boolean True on success, false on error
+     */
+    public function deleteSetting($section, $key)
+    {
+        $model = static::findOne(['section' => $section, 'key' => $key]);
+        if ($model) {
+            return $model->delete();
+        }
+        return true;
+    }
+
+    /**
+     * Deletes all settings! Be careful!
+     * @return boolean True on success, false on error
+     */
+    public function deleteAllSettings()
+    {
+        return static::deleteAll();
+    }
+
 }

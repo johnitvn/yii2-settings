@@ -7,6 +7,5 @@ class Module extends BaseModule
 {
 
 	public $controllerNamespace = 'johnitvn\settings\controllers';
-	//public $defaultRoute = 'manager/index';
 
 }

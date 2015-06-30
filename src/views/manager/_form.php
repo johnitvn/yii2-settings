@@ -16,18 +16,14 @@ use yii\widgets\ActiveForm;
         'integer' => 'Integer',
         'boolean' => 'Boolean',
         'float' => 'Float',   
+        'null' => 'Null',   
     ])?>
+
     <?= $form->field($model, 'section')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'active')->textInput() ?>
-
-    <?= $form->field($model, 'created')->textInput() ?>
-
-    <?= $form->field($model, 'modified')->textInput() ?>
+    <?= $form->field($model, 'value')->textarea(['rows' => 6]) ?>   
 
   
 <?php if (!Yii::$app->request->isAjax){ ?>
