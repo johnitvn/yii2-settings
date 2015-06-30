@@ -35,7 +35,8 @@ class Settings extends \yii\db\ActiveRecord
             [['value'], 'string'],
             [['active'], 'integer'],
             [['created', 'modified'], 'safe'],
-            [['type', 'section', 'key'], 'string', 'max' => 255]
+            [['type', 'section', 'key'], 'string', 'max' => 255],
+            [['type','section','key'],'required']
         ];
     }
 

@@ -11,8 +11,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
-
+    <?= $form->field($model, 'type')->dropDownList([
+        'string' => 'String',
+        'integer' => 'Integer',
+        'boolean' => 'Boolean',
+        'float' => 'Float',   
+    ])?>
     <?= $form->field($model, 'section')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>

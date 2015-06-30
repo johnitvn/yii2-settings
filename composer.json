@@ -12,10 +12,7 @@
     "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "*",
-        "kartik-v/yii2-grid": "3.0.4",
-        "kartik-v/yii2-mpdf": "v1.0.0",
-        "kartik-v/yii2-editable": "1.7.2",
-        "kartik-v/yii2-widget-select2": "*"
+        "johnitvn/yii2-ajaxcrud-assets": "*"    
     },
     "autoload": {
         "psr-4": {
