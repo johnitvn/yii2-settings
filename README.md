@@ -8,6 +8,11 @@ yii2-settings
 
 Yii2 settings with database module with GUI manager supported
 
+
+
+![yii2-settings](https://c1.staticflickr.com/1/491/18760365473_d5aed4619d_z.jpg "yii2-settings")
+
+
 Installation
 ------------
 
