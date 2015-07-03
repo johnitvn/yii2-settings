@@ -36,7 +36,7 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Add settings into component config: 
+####Add settings into component config: 
 
 ````php
 'components' => [        
@@ -46,7 +46,7 @@ Add settings into component config:
 ],
 ````
 
-Ok let see this codesnipet to use:
+####Ok let see this codesnipet to use:
 
 ````php
 $settings = Yii::$app->settings;
@@ -57,7 +57,7 @@ $settings->set('section','key', 'value', 'integer');
 
 ````
 
-Look at line:
+####Look at line:
 ````php
 $settings->set($section,$key,$value,$type);
 ````
@@ -66,9 +66,7 @@ And the $type will be use for get settings. This extension have used [settype](h
 
 
 
-
-
-If you want to manager setting with GUI then add settings into module config:
+####If you want to manager setting with GUI then add settings into module config:
 ````php
 'modules' => [
     'settings' =>  [
