@@ -1,5 +1,6 @@
 yii2-settings
 =============
+Yii2 settings with database module with GUI manager supported
 
 Installation
 ------------
