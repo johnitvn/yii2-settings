@@ -57,6 +57,17 @@ $settings->set('section','key', 'value', 'integer');
 
 ````
 
+Look at line:
+````php
+$settings->set($section,$key,$value,$type);
+````
+You can use $section for distribute setting such as system,user...
+And the $type will be use for get settings. This extension have used [settype](http://php.net/manual/en/function.settype.php) for set the type of a setting when you get it
+
+
+
+
+
 If you want to manager setting with GUI then add settings into module config:
 ````php
 'modules' => [
