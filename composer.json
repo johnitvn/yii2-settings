@@ -1,6 +1,6 @@
 {
     "name": "johnitvn/yii2-settings",
-    "description": "Yii2 settings with database module",
+    "description": "Yii2 settings with database module with GUI manager supported",
     "type": "yii2-extension",
     "license": "Apache-2.0",
     "authors": [
