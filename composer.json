@@ -12,7 +12,8 @@
     "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "*",
-        "johnitvn/yii2-ajaxcrud-assets": "*"    
+        "johnitvn/yii2-ajaxcrud-assets": "*",
+        "kartik-v/yii2-widget-select2":"*"
     },
     "autoload": {
         "psr-4": {
