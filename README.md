@@ -5,6 +5,7 @@ yii2-settings
 [![Total Downloads](https://poser.pugx.org/johnitvn/yii2-settings/downloads)](https://packagist.org/packages/johnitvn/yii2-settings)
 [![Monthly Downloads](https://poser.pugx.org/johnitvn/yii2-settings/d/monthly)](https://packagist.org/packages/johnitvn/yii2-settings)
 [![Daily Downloads](https://poser.pugx.org/johnitvn/yii2-settings/d/daily)](https://packagist.org/packages/johnitvn/yii2-settings)
+
 Yii2 settings with database module with GUI manager supported
 
 Installation
