@@ -6,8 +6,7 @@ use yii\widgets\DetailView;
 /* @var $model johnitvn\settings\models\Settings */
 ?>
 <div class="settings-view">
-
-  
+ 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -15,7 +14,7 @@ use yii\widgets\DetailView;
             'type',
             'section',
             'key',
-            'value:ntext',       
+            'value:ntext',
         ],
     ]) ?>
 

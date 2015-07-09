@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\grid\GridView;
 use \yii\web\Response;
+use yii\helpers\Html;
 
 /**
  * ManagerController implements the CRUD actions for Settings model.
@@ -59,11 +60,13 @@ class ManagerController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'code'=>'200',
-                    'message'=>'OK',
-                    'data'=>$this->renderPartial('view', [
+                    'error'=>false,
+                    'title'=> "Settings #".$id,
+                    'content'=>$this->renderPartial('view', [
                         'model' => $this->findModel($id),
-                    ])
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];    
         }else{
             return $this->render('view', [
@@ -90,24 +93,34 @@ class ManagerController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'code'=>'200',
-                    'message'=>'OK',
-                    'data'=>$this->renderPartial('create', [
+                    'error'=>false,
+                    'title'=> "Create new Settings",
+                    'content'=>$this->renderPartial('create', [
                         'model' => $model,
                     ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
-                    'code'=>'200',
-                    'message'=>'Create Settings success',
-                ];
-            }else{
+                    'error'=>false,
+                    'title'=> "Create new Settings",
+                    'content'=>'<span class="text-success">Create Settings success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+        
+                ];         
+            }else{           
                 return [
-                    'code'=>'400',
-                    'message'=>'Validate error',
-                    'data'=>$this->renderPartial('create', [
+                    'error'=>false,
+                    'title'=> "Create new Settings",
+                    'content'=>$this->renderPartial('create', [
                         'model' => $model,
                     ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
                 ];         
             }
         }else{
@@ -144,17 +157,24 @@ class ManagerController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'code'=>'200',
-                    'message'=>'OK',
-                    'data'=>$this->renderPartial('update', [
-                        'model' => $model,
+                    'error'=>false,
+                    'title'=> "Update Settings #".$id,
+                    'content'=>$this->renderPartial('update', [
+                        'model' => $this->findModel($id),
                     ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
-                    'code'=>'200',
-                    'message'=>'Create Settings success',
-                ];
+                    'error'=>false,
+                    'title'=> "Settings #".$id,
+                    'content'=>$this->renderPartial('view', [
+                        'model' => $this->findModel($id),
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                ];    
             }else{
                 return [
                     'code'=>'400',
@@ -188,6 +208,8 @@ class ManagerController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return ['forceClose'=>true,'forceReload'=>true];         
     }
 
      /**
@@ -204,6 +226,8 @@ class ManagerController extends Controller
         foreach (Settings::findAll(json_decode($pks)) as $model) {
             $model->delete();
         }
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return ['forceClose'=>true,'forceReload'=>true]; 
     }
 
     /**
