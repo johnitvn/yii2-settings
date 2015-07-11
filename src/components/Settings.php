@@ -6,7 +6,7 @@ namespace johnitvn\settings\components;
 use yii\base\Component;
 use yii\caching\Cache;
 use Yii;
-use johnitvn\settings\models\Setting;
+use johnitvn\settings\models\Settings as SettingModel;
 
 
 class Settings extends Component
@@ -60,7 +60,7 @@ class Settings extends Component
     {
         parent::init();
 
-        $this->model = new Setting();
+        $this->model = new SettingModel();
 
         if (is_string($this->cache)) {
             $this->cache = Yii::$app->get($this->cache, false);

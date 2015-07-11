@@ -3,7 +3,7 @@
 namespace johnitvn\settings\models;
 
 use Yii;
-
+use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "settings".
  *
@@ -59,7 +59,7 @@ class Settings extends \yii\db\ActiveRecord
      */
     public function getSettings()
     {
-        $settings = static::find()->where(['active' => 1])->asArray()->all();
+        $settings = static::find()->asArray()->all();
         return array_merge_recursive(
             ArrayHelper::map($settings, 'key', 'value', 'section'),
             ArrayHelper::map($settings, 'key', 'type', 'section')
