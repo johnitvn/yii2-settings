@@ -81,7 +81,6 @@ class Settings extends \yii\db\ActiveRecord
         $model = static::findOne(['section' => $section, 'key' => $key]);
         if ($model === null) {
             $model = new static();
-            $model->active = 1;
         }
         $model->section = $section;
         $model->key = $key;
