@@ -55,6 +55,12 @@ $value = $settings->get('section,'key');
 
 $settings->set('section','key', 'value', 'integer');
 
+$settings->delete('section,'key');
+
+$settings->deleteAll('section,'key');
+
+$settings->clearCache(); // automatic call when use set()
+
 ````
 
 ####Look at line:
