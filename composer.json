@@ -1,5 +1,5 @@
 {
-    "name": "valery-lavrik/yii2-settings",
+    "name": "johnitvn/yii2-settings",
     "description": "Yii2 settings with database module with GUI manager supported",
     "type": "yii2-extension",
     "license": "Apache-2.0",
