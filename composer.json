@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "johnitvn\\settings\\": "src/"
+            "valery-lavrik\\settings\\": "src/"
         }
     }
   
